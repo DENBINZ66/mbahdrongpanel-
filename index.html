@@ -3,182 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBAHDRONG V1</title>
 
-<title>Mbahdrong</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
 body{
-background:#000;
-color:white;
-font-family:Arial;
 margin:0;
+overflow:hidden;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
 }
 
-.header{
-display:flex;
-align-items:center;
-padding:15px;
-background:#111;
+/* BACKGROUND */
+
+#bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
 }
 
-.profile{
-width:45px;
-height:45px;
-border-radius:50%;
-margin-right:10px;
-cursor:pointer;
-}
-
-.name{
-font-size:18px;
-font-weight:bold;
-}
-
-.role{
-font-size:13px;
-color:#ccc;
-}
-
-.emoji{
-filter: grayscale(100%) brightness(1.6);
-margin-right:5px;
-}
+/* LOGIN BOX */
 
 .container{
-padding:15px;
-}
-
-.banner{
-width:100%;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:320px;
+background:rgba(20,20,20,0.85);
+padding:30px;
 border-radius:15px;
-overflow:hidden;
-}
-
-.banner video{
-width:100%;
-border-radius:15px;
-}
-
-.menu{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
-.btn{
-flex:1;
-padding:15px;
 text-align:center;
-border-radius:12px;
-border:2px solid white;
-background:black;
-color:silver;
-font-weight:bold;
-cursor:pointer;
+box-shadow:0 0 25px rgba(0,0,0,0.6);
 }
 
-.btn.active{
-background:#111;
+.logo{
+width:80px;
+height:80px;
+border-radius:10px;
+margin-bottom:10px;
 }
 
-.quiz-box{
-background:#0f0f0f;
-padding:18px;
-border-radius:16px;
-margin-top:20px;
+h1{
+margin:10px 0;
+font-size:28px;
 }
 
-.quiz-box label{
-font-size:13px;
-color:#aaa;
+.sub{
+font-size:14px;
+color:#bbb;
+margin-bottom:20px;
 }
+
+/* INPUT */
 
 .input-box{
-display:flex;
-align-items:center;
-background:#151515;
-padding:12px;
-border-radius:12px;
-margin-top:6px;
-margin-bottom:15px;
+position:relative;
+margin:10px 0;
 }
 
-.icon2{
-margin-right:10px;
-font-size:18px;
+.input-box i{
+position:absolute;
+left:10px;
+top:50%;
+transform:translateY(-50%);
 color:silver;
 }
 
 .input-box input{
-background:none;
-border:none;
-outline:none;
-color:white;
 width:100%;
-font-size:15px;
-}
-
-.level-box{
-background:#151515;
-border-radius:12px;
-padding:10px;
-margin-top:6px;
-margin-bottom:15px;
-}
-
-.level-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-cursor:pointer;
-padding:10px;
-background:#1a1a1a;
+padding:12px;
+padding-left:35px;
+border:none;
 border-radius:8px;
+background:#2a2a2a;
+color:white;
+font-size:14px;
 }
 
-.arrow{
-font-size:18px;
-color:silver;
-}
+/* BUTTON */
 
-.level-option{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px;
-cursor:pointer;
-}
-
-.circle{
-width:18px;
-height:18px;
-border-radius:50%;
-border:2px solid silver;
-}
-
-.circle.active{
-background:silver;
-box-shadow:0 0 10px silver;
-}
-
-.startquiz{
+button{
 width:100%;
-padding:15px;
-border-radius:14px;
+padding:12px;
+margin-top:15px;
 border:none;
-font-size:16px;
+border-radius:8px;
+background:linear-gradient(90deg,#2e2e2e,#555,#2e2e2e);
+color:white;
 font-weight:bold;
 cursor:pointer;
-background:linear-gradient(90deg,#bfbfbf,#ffffff,#bfbfbf);
-color:black;
 }
 
-.hidden{
-display:none;
+button:hover{
+background:#444;
 }
 
-.popup{
+/* VIEW PLANS */
+
+.plans{
+margin-top:10px;
+background:linear-gradient(90deg,#2e2e2e,#555,#2e2e2e);
+padding:12px;
+border-radius:8px;
+cursor:pointer;
+font-size:14px;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:20px;
+font-size:12px;
+color:#888;
+}
+
+/* LOADING */
+
+#loadingScreen{
 position:fixed;
 top:0;
 left:0;
@@ -186,50 +134,72 @@ width:100%;
 height:100%;
 background:rgba(0,0,0,0.7);
 display:none;
-align-items:center;
 justify-content:center;
-z-index:999;
+align-items:center;
 }
 
-.popup-box{
-background:#111;
-padding:25px;
-border-radius:15px;
+.loadingBox{
+width:220px;
+border:1px solid rgba(192,192,192,0.4);
+padding:20px;
+border-radius:10px;
 text-align:center;
-width:260px;
-box-shadow:0 0 20px silver;
-position:relative;
+background:rgba(20,20,20,0.8);
 }
 
-.loadingbar{
+.loadingText{
+color:silver;
+font-size:14px;
+margin-bottom:10px;
+}
+
+.progressBar{
 width:100%;
 height:8px;
 background:#333;
-border-radius:10px;
+border-radius:5px;
 overflow:hidden;
-margin-top:10px;
 }
 
-.loadingfill{
-width:0%;
+.progress{
 height:100%;
+width:0%;
 background:silver;
 }
 
-.closeX{
-position:absolute;
-top:10px;
-right:15px;
-font-size:22px;
-cursor:pointer;
-color:silver;
+/* POPUP */
+
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(0,0,0,0.7);
+border:1px solid silver;
+border-radius:12px;
+padding:16px;
+text-align:center;
+display:none;
 }
 
-.profileinfo{
-background:#1a1a1a;
-padding:10px;
-border-radius:10px;
+.popup h3{
+color:silver;
+margin-bottom:6px;
+}
+
+.popup p{
+color:silver;
+font-size:12px;
+}
+
+.ok-btn{
+background:transparent;
+border:1px solid silver;
+color:silver;
+padding:5px 12px;
+border-radius:6px;
 margin-top:10px;
+cursor:pointer;
 }
 
 </style>
@@ -237,372 +207,200 @@ margin-top:10px;
 
 <body>
 
-<audio id="bgm" loop>
-<source src="song.mp3">
-</audio>
-
-<audio id="click">
-<source src="click1.mp3">
-</audio>
-
-<div class="header">
-
-<img src="logo.jpg" class="profile" onclick="openProfile()">
-
-<div>
-<div class="name">free.mbahdrong</div>
-<div class="role">Role : FREE • Exp : <span id="exp"></span></div>
-</div>
-
-</div>
+<canvas id="bg"></canvas>
 
 <div class="container">
 
-<div class="banner">
-<video id="vid" autoplay muted loop playsinline>
-<source src="video1.mp4">
-</video>
-</div>
+<img src="logo.jpg" class="logo">
 
-<div class="menu">
+<h1>MBAHDRONG V1</h1>
 
-<div class="btn active" onclick="openMenu('quiz',this)">
-<span class="emoji">🧩</span> QUIZ
-</div>
-
-<div class="btn" onclick="openMenu('redeem',this)">
-<span class="emoji">🎁</span> KODE REDEEM
-</div>
-
-</div>
-
-<div id="quiz">
-
-<div class="quiz-box">
-
-<label>USERNAME</label>
+<div class="sub">Welcome to App Gondrong</div>
 
 <div class="input-box">
-<span class="icon2 emoji">👤</span>
-<input id="username" type="text" placeholder="Contoh : YantoGaming">
+<i class="fa-solid fa-user"></i>
+<input type="text" id="username" placeholder="Username" onclick="playMusic()">
 </div>
-
-<label>PILIH LEVEL</label>
-
-<div class="level-box">
-
-<div class="level-header" onclick="toggleMode()">
-<span><span class="emoji">🎮</span> Mode</span>
-<span id="arrow" class="arrow">⌄</span>
-</div>
-
-<div id="modeList" class="hidden">
-
-<div class="level-option" onclick="selectLevel(this,'easy')">
-<span>• Easy</span>
-<div class="circle"></div>
-</div>
-
-<div class="level-option" onclick="selectLevel(this,'medium')">
-<span>• Medium</span>
-<div class="circle"></div>
-</div>
-
-<div class="level-option" onclick="selectLevel(this,'hard')">
-<span>• Hard</span>
-<div class="circle"></div>
-</div>
-
-</div>
-
-</div>
-
-<button class="startquiz" onclick="startQuiz()">
-<span class="emoji">🚀</span> START QUIZ
-</button>
-
-</div>
-
-</div>
-
-<div id="redeem" class="hidden">
-
-<div class="quiz-box">
-
-<label>KODE REDEEM</label>
 
 <div class="input-box">
-<span class="icon2 emoji">🎁</span>
-<input type="text" id="redeemInput" placeholder="Masukkan kode">
+<i class="fa-solid fa-key"></i>
+<input type="password" id="password" placeholder="Password" onclick="playMusic()">
 </div>
 
-<button class="startquiz" onclick="redeemCode()">
-TUKAR KODE
+<button onclick="login()">
+<i class="fa-solid fa-lock"></i> LOGIN NOW
 </button>
 
+<div class="plans">
+<i class="fa-solid fa-crown"></i> VIEW PLANS & PRICING
+</div>
+
+<div class="footer">
+© mbahgondrong V1. all rights reserved
 </div>
 
 </div>
 
+<!-- LOADING -->
+
+<div id="loadingScreen">
+<div class="loadingBox">
+
+<div class="loadingText">
+Please wait for loading
 </div>
 
-<div id="popup" class="popup">
-<div class="popup-box">
-<div id="popupText"></div>
-<br>
-<button onclick="closePopup()">OK</button>
-</div>
-</div>
-
-<div id="profilePopup" class="popup">
-<div class="popup-box">
-
-<div class="closeX" onclick="closeProfile()">✕</div>
-
-<img src="logo.jpg" style="width:70px;border-radius:50%;margin-bottom:10px">
-
-<h2>free.mbahdrong</h2>
-
-<div class="profileinfo">
-Role : FREE
-</div>
-
-<div class="profileinfo">
-Exp : <span id="expPopup"></span>
-</div>
-
-<div class="profileinfo">
-Score : <span id="scorePopup"></span>
+<div class="progressBar">
+<div class="progress" id="progress"></div>
 </div>
 
 </div>
 </div>
+
+<!-- LOGIN FAILED -->
+
+<div id="errorBox" class="popup">
+<h3>Login Failed</h3>
+<p>Username or password is incorrect</p>
+</div>
+
+<!-- LOGIN SUCCESS -->
+
+<div id="successBox" class="popup">
+<h3>Login Successful</h3>
+<p>Welcome back!</p>
+<button class="ok-btn" onclick="nextPage()">OK</button>
+</div>
+
+<!-- MUSIC -->
+
+<audio id="bgMusic" loop>
+<source src="song1.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 
-const music=document.getElementById("bgm")
-const video=document.getElementById("vid")
-const click=document.getElementById("click")
+/* MUSIC */
 
-let selectedMode=null
+var music=document.getElementById("bgMusic")
+music.volume=0.2
 
-document.body.addEventListener("click",function(){
-
-music.volume=0.6
+function playMusic(){
 music.play()
-
-video.muted=false
-video.play()
-
-},{once:true})
-
-function playClick(){
-click.currentTime=0
-click.play()
 }
 
-function openMenu(menu,btn){
+/* LOGIN */
 
-playClick()
+function login(){
 
-document.getElementById("quiz").classList.add("hidden")
-document.getElementById("redeem").classList.add("hidden")
+let user=document.getElementById("username").value
+let pass=document.getElementById("password").value
 
-document.getElementById(menu).classList.remove("hidden")
+if(user=="gondrong" && pass=="161211"){
 
-document.querySelectorAll(".btn").forEach(b=>{
-b.classList.remove("active")
-})
+document.getElementById("loadingScreen").style.display="flex"
 
-btn.classList.add("active")
-
-}
-
-function toggleMode(){
-
-playClick()
-
-let list=document.getElementById("modeList")
-let arrow=document.getElementById("arrow")
-
-if(list.classList.contains("hidden")){
-list.classList.remove("hidden")
-arrow.innerHTML="⌃"
-}else{
-list.classList.add("hidden")
-arrow.innerHTML="⌄"
-}
-
-}
-
-function selectLevel(el,mode){
-
-playClick()
-
-document.querySelectorAll(".circle").forEach(c=>{
-c.classList.remove("active")
-})
-
-el.querySelector(".circle").classList.add("active")
-
-selectedMode=mode
-
-}
-
-function startQuiz(){
-
-playClick()
-
-let username=document.getElementById("username").value.trim()
-
-if(username===""){
-showPopup("Harap masukkan username")
-return
-}
-
-if(selectedMode===null){
-showPopup("Login failed please select mode")
-return
-}
-
-document.getElementById("popup").style.display="flex"
-
-document.getElementById("popupText").innerHTML=
-"Please wait loading"+
-"<div class='loadingbar'><div id='loadingFill' class='loadingfill'></div></div>"
-
-let progress=0
+let bar=document.getElementById("progress")
+let width=0
 
 let load=setInterval(function(){
 
-progress+=10
+width++
+bar.style.width=width+"%"
 
-document.getElementById("loadingFill").style.width=progress+"%"
-
-if(progress>=100){
+if(width>=100){
 
 clearInterval(load)
 
+document.getElementById("loadingScreen").style.display="none"
+
+document.getElementById("successBox").style.display="block"
+
+}
+
+},20)
+
+}else{
+
+let err=document.getElementById("errorBox")
+
+err.style.display="block"
+
 setTimeout(function(){
-
-document.getElementById("popupText").innerHTML="Login Successful"
-
-setTimeout(function(){
-
-if(selectedMode==="easy") window.location="easy.html"
-if(selectedMode==="medium") window.location="medium.html"
-if(selectedMode==="hard") window.location="hard.html"
-
-},1000)
-
-},500)
+err.style.display="none"
+},2000)
 
 }
 
-},200)
+}
+
+function nextPage(){
+window.location.href="page2.html"
+}
+
+/* BACKGROUND GARIS */
+
+const canvas=document.getElementById("bg")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let lines=[]
+
+for(let i=0;i<80;i++){
+lines.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5)*1,
+vy:(Math.random()-0.5)*1
+})
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+for(let i=0;i<lines.length;i++){
+
+let p=lines[i]
+
+p.x+=p.vx
+p.y+=p.vy
+
+if(p.x<0||p.x>canvas.width)p.vx*=-1
+if(p.y<0||p.y>canvas.height)p.vy*=-1
+
+ctx.beginPath()
+ctx.arc(p.x,p.y,2,0,Math.PI*2)
+ctx.fillStyle="white"
+ctx.fill()
+
+for(let j=i+1;j<lines.length;j++){
+
+let p2=lines[j]
+
+let dist=Math.hypot(p.x-p2.x,p.y-p2.y)
+
+if(dist<120){
+
+ctx.beginPath()
+ctx.moveTo(p.x,p.y)
+ctx.lineTo(p2.x,p2.y)
+ctx.strokeStyle="rgba(255,255,255,0.1)"
+ctx.stroke()
 
 }
 
-let score = localStorage.getItem("score") || 0
-
-function redeemCode(){
-
-playClick()
-
-let code=document.getElementById("redeemInput").value.toUpperCase()
-
-if(code==="MBAHDRONG"){
-
-score=parseInt(score)+50
-localStorage.setItem("score",score)
-
-showPopup("Redeem Berhasil +50 Skor")
+}
 
 }
 
-else if(code==="RAMADHAN"){
-
-score=parseInt(score)+30
-localStorage.setItem("score",score)
-
-showPopup("Redeem Berhasil +30 Skor")
+requestAnimationFrame(animate)
 
 }
 
-else{
-
-showPopup("Failed to Redeem Code")
-
-}
-
-document.getElementById("redeemInput").value=""
-
-}
-
-function showPopup(text){
-
-document.getElementById("popupText").innerHTML=text
-document.getElementById("popup").style.display="flex"
-
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none"
-}
-
-function openProfile(){
-
-playClick()
-
-document.getElementById("profilePopup").style.display="flex"
-
-document.getElementById("scorePopup").innerText =
-localStorage.getItem("score") || 0
-
-}
-
-function closeProfile(){
-
-playClick()
-
-document.getElementById("profilePopup").style.display="none"
-
-}
-
-/* EXP TIMER */
-
-let startTime = localStorage.getItem("startTime")
-
-if(!startTime){
-startTime = Date.now()
-localStorage.setItem("startTime",startTime)
-}
-
-let duration = 7*24*60*60*1000
-
-function updateExp(){
-
-let now = Date.now()
-
-let end = parseInt(startTime) + duration
-
-let remaining = end - now
-
-let days=Math.floor(remaining/(1000*60*60*24))
-let hours=Math.floor((remaining/(1000*60*60))%24)
-let minutes=Math.floor((remaining/(1000*60))%60)
-let seconds=Math.floor((remaining/1000)%60)
-
-let text=days+" Hari "+hours+" Jam "+minutes+" Menit "+seconds+" Detik"
-
-document.getElementById("exp").innerText=text
-document.getElementById("expPopup").innerText=text
-
-}
-
-setInterval(updateExp,1000)
-
-updateExp()
+animate()
 
 </script>
 
